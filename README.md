@@ -103,11 +103,9 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-<p align="center">
-  <img src="./output_images/6_project_video_processed.gif">
-  <h>       </h>
-  <img src="./output_images/7_challenge_video_processed.gif">
-</p>
+|Project Video|Challenge Video|
+|-------------|-------------|
+|![ProjectVideo](./output_images/6_project_video_processed.gif)|![ChallengeVideo](./output_images/7_challenge_video_processed.gif)|
 
 ---
 
