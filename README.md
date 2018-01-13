@@ -19,13 +19,13 @@ The code for these steps can be found in the [Jupyter notebook](https://github.c
 
 ### Camera Calibration
 
-I started by using [OpenCV](http://opencv.org/) functions [`findChessboardCorners`](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#bool findChessboardCorners(InputArray image, Size patternSize, OutputArray corners, int flags)) and [`drawChessboardCorners`](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#drawchessboardcorners) in the 2nd cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb) to identify corners of a list of chessboard pictures from different perspectives. Here is an example pair of pictures before and after corners were found:
+I started by using [OpenCV](http://opencv.org/) functions `findChessboardCorners` and `drawChessboardCorners` in the 2nd cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb) to identify corners of a list of chessboard pictures from different perspectives. Here is an example pair of pictures before and after corners were found:
 
 <p align="center">
   <img src="./output_images/1_calibration.jpg">
 </p>
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function in the 3rd and 4th cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb).  I applied this distortion correction to the test image using the [`cv2.undistort()`](https://docs.opencv.org/2.4/modules/imgproc/doc/geometric_transformations.html#void undistort(InputArray src, OutputArray dst, InputArray cameraMatrix, InputArray distCoeffs, InputArray newCameraMatrix)) function and obtained this result: 
+I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function in the 3rd and 4th cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb).  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
 <p align="center">
   <img src="./output_images/2_distortion_corrected.jpg">
