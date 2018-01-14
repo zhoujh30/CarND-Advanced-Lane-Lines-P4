@@ -92,9 +92,9 @@ Finally, I filled the space between the two lane lines to highlight the area.
 
 After the images were processed, the final step was to develop a pipeline to process videos--a streaming of images. 
 
-One important step for video processing is to keep track of things like where last several detections of the lane lines were and what the curvature was, so new detections can be properly treated. To do this, I defined a Line() class in the 11th cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb) to keep track of all the interesting parameters I measure from frame to frame. Once I found the lane lines in one frame of video, and if I was reasonably confident they were actually the lines I was looking for, I didn't need to search blindly in the next frame. I could simply search within a window around the previous detection.
+One important step for video processing is to keep track of things like where last several detections of the lane lines were and what the curvature was, so new detections can be properly treated. To do this, I defined a `Line()` class in the 11th cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb) to keep track of all the interesting parameters I measure from frame to frame. Once I found the lane lines in one frame of video, and if I was reasonably confident they were actually the lines I was looking for, I didn't need to search blindly in the next frame. I could simply search within a window around the previous detection.
 
-Here are the processed results from project video and challenge video:
+Here are processed results from project video and challenge video:
 
 |Project Video|Challenge Video|
 |-------------|-------------|
@@ -104,6 +104,6 @@ Here are the processed results from project video and challenge video:
 
 ### Discussion
 
-Overall, the lane finding methodology used in this project worked quite well compared to a previous one here: [CarND-LaneLines-P1](https://github.com/zhoujh30/CarND-LaneLines-P1). The processed project video did a pretty robust job of identifying lane lines of all time. On a chellenge video, however, it achieved overall satisfying detection but failed when there was a heavy shadow under the bridge and when a car was getting closer to the right lane. I also tested the processing pipeline on the harder challenge video--it failed on the most part since there were constantly changing lane color with shadow or reflection of sunshine.
+Overall, the lane finding methodology used in this project worked quite well compared to a previous one: [CarND-LaneLines-P1](https://github.com/zhoujh30/CarND-LaneLines-P1). The processed project video did a pretty robust job of identifying lane lines of all time. On a chellenge video, however, it achieved mostly satisfying detection but failed when there was a heavy shadow under the bridge and when a car was getting closer to the right lane. I also tested the processing pipeline on the harder challenge video--it failed on the most part since there were constantly changes of lane color comparison with shadow or reflection of sunshine.
 
-To improve the result, I can further fine-tune the choices of threholds and channels used in combined binary. The other approach is to explore the potential of using neural network to detect lane lines.
+To improve the result, I can further fine-tune the choices of threholds and channels used in combined binary. The other approach is to explore the potential of using neural network to better detect lane lines.
