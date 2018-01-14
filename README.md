@@ -19,7 +19,7 @@ The code for these steps can be found in the [Jupyter notebook](https://github.c
 
 ### Camera Calibration
 
-I started by using [OpenCV](http://opencv.org/) functions `findChessboardCorners` and `drawChessboardCorners` in the 2nd cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb) to identify corners of a list of chessboard pictures from different perspectives. Here is an example pair of pictures before and after corners were found:
+I started by using [OpenCV](http://opencv.org/) functions `findChessboardCorners` and `drawChessboardCorners` in the 2nd cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb) to identify corners of a list of chessboard pictures from different perspectives. For example, here are two pairs of pictures before and after corners were found:
 
 <p align="center">
   <img src="./output_images/1_calibration.jpg">
@@ -68,15 +68,19 @@ Here's an example of my output for this step:
   <img src="./output_images/4_identify_lanes.jpg">
 </p>
 
-#### 3.  Fitted lane lines with a polynomial and filled lanes
+#### 3.  Fitted lane lines with a polynomial, calculated curvature and filled lanes
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I detected lane pixels and fitted it with a polynomial using [NumPy](http://www.numpy.org/) functions `numpy.nonzero()` and `numpy.polyfit()`.
 
-calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+I then calculated the position of the vehicle with respect to center by:
+*Calculating the average of the x intercepts from each of the two polynomials 
+*Calculating the distance between the vehicle position and the midpoint of horizontal axis 
+*Identifying the position of the vehicle (If the horizontal position of the car was greater than the midpoint then the car was considered to be left of center, otherwise right of center)
+*Converting the distance from pixels to meters
 
-I did this in lines # through # in my code in `my_other_file.py`
+After that, I calculated the radius of curvature for each lane based on [an methodology by M. Bourne](https://www.intmath.com/applications-differentiation/8-radius-curvature.php).
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+Finally, I filled the space between the two lane lines to highlight the area.
 
 <p align="center">
   <img src="./output_images/5_fit_fill.jpg">
@@ -86,7 +90,11 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+After the images were processed, the final step was to develop a pipeline to process videos--a streaming of images. 
+
+One important step for video processing is to keep track of things like where last several detections of the lane lines were and what the curvature was, so new detections can be properly treated. To do this, I defined a Line() class in the 11th cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb) to keep track of all the interesting parameters I measure from frame to frame. Once I found the lane lines in one frame of video, and if I was reasonably confident they were actually the lines I was looking for, I didn't need to search blindly in the next frame. I could simply search within a window around the previous detection.
+
+Here are the processed results from project video and challenge video:
 
 |Project Video|Challenge Video|
 |-------------|-------------|
@@ -96,6 +104,6 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+Overall, the lane finding methodology used in this project worked quite well compared to a previous one here: [CarND-LaneLines-P1](https://github.com/zhoujh30/CarND-LaneLines-P1). The processed project video did a pretty robust job of identifying lane lines of all time. On a chellenge video, however, it achieved overall satisfying detection but failed when there was a heavy shadow under the bridge and when a car was getting closer to the right lane. I also tested the processing pipeline on the harder challenge video--it failed on the most part since there were constantly changing lane color with shadow or reflection of sunshine.
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further. 
+To improve the result, I can further fine-tune the choices of threholds and channels used in combined binary. The other approach is to explore the potential of using neural network to detect lane lines.
