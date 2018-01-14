@@ -39,12 +39,14 @@ I then started processing the distortion-corrected images like the example showe
 
 The code for my perspective transform includes a function called `corners_unwarp()` in the 5th and 6th code cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb). The `corners_unwarp()` function takes an input of an image (`img`), but also needs specified source (`src`) and destination (`dst`) points. I chose the following source and destination points:
 
+<center>
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
 | 490, 482      | 0, 0        | 
 | 810, 482      | 1280, 0      |
 | 1250, 720     | 1250, 720      |
 | 40, 720       | 40, 720        |
+</center>
 
 Here is an example before and after applying the `corners_unwarp()` function:
 
@@ -56,11 +58,13 @@ Here is an example before and after applying the `corners_unwarp()` function:
 
 I used a combination of color and gradient thresholds to generate a binary image in the 7th and 8th code cell of the [Jupyter notebook](https://github.com/zhoujh30/CarND-Advanced-Lane-Lines-P4/blob/master/Advanced_Lane_Finding.ipynb). Here is the channels I found to be good at isolating the lane line pixels:
 
+<center>
 | Channel        | Color Space   | Min Threshold  | Max Threshold |
 |:-------------:|:-------------: | :-------------:|:-------------:| 
 | S             | HLS            | 180            |255            |
 | B             | Lab            | 155            |200            |
 | L             | LUV            | 255            |255            |
+</center>
 
 Here's an example of my output for this step:
 
@@ -96,9 +100,11 @@ One important step for video processing is to keep track of things like where la
 
 Here are processed results from project video and challenge video:
 
+<center>
 |Project Video|Challenge Video|
 |-------------|-------------|
 |![ProjectVideo](./output_images/6_project_video_processed.gif)|![ChallengeVideo](./output_images/7_challenge_video_processed.gif)|
+</center>
 
 ---
 
